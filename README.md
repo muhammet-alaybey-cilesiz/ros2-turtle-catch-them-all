@@ -1,30 +1,37 @@
 # 🐢 ROS 2 Turtle Catch Them All
 
-Bu proje, ROS 2 mimarisi kullanılarak geliştirilmiş otonom bir "avcı-toplayıcı" kaplumbağa simülasyonudur. Turtlesim düğümü üzerinde çalışan sistem, rastgele konumlarda beliren hedefleri (food turtles) algılar, oransal kontrol (P-Controller) ile rotasını hesaplar ve hedefleri teker teker avlar.
+This project is an autonomous "hunter-gatherer" turtle simulation developed using the ROS 2 framework. Running alongside the turtlesim node, the system detects randomly spawning targets (food turtles), calculates its trajectory using a proportional controller (P-Controller), and hunts the targets one by one.
 
-## ⚙️ Sistem Mimarisi ve Özellikler
+## ⚙️ System Architecture & Features
 
-Proje, modüler bir yapıya sahip olup 4 ana paketten oluşmaktadır:
+The project has a modular structure and consists of 4 main packages:
 
-* **`robot_interfaces`**: Hedeflerin isim ve konum verilerini taşımak için özel olarak tasarlanmış (Custom Message) `FoodState` ve `FoodStateArray` mesaj tiplerini barındırır.
-* **`turtle_spawner`**: Belirli zaman aralıklarıyla sahneye yeni hedefler (food) ekler. Ekrandaki hedeflerin güncel pozisyonlarını ve isimlerini `/food_turtle_poses` isimli topic üzerinden yayınlar.
-* **`turtle_controller`**: Ana kaplumbağanın beynidir. Dinamik olarak en yakın hedefi hesaplar, hedefe olan açısal hatayı ve uzaklığı baz alarak `/turtle1/cmd_vel` üzerinden hız komutları (Twist) gönderir. Hedefe ulaşıldığında turtlesim'in `kill` servisini çağırarak hedefi sahneden siler.
-* **`robot_bringup`**: Tüm sistemi ve node'ları tek bir komutla ayağa kaldıran Launch dosyalarını içerir.
+* **`robot_interfaces`**: Contains custom message types (`FoodState` and `FoodStateArray`) specifically designed to carry the name and position data of the targets.
+* **`turtle_spawner`**: Spawns new targets (food) into the scene at regular intervals. It publishes the current positions and names of the active targets on the screen via the `/food_turtle_poses` topic.
+* **`turtle_controller`**: The brain of the main turtle. It dynamically calculates the nearest target and sends velocity commands (Twist) over `/turtle1/cmd_vel` based on the angular error and distance to the target. Once the target is reached, it calls turtlesim's `kill` service to remove the target from the scene.
+* **`robot_bringup`**: Contains the launch files required to start the entire system and all nodes with a single command.
 
-## 🛠️ Kurulum (Installation)
+## 🛠️ Installation
 
-Projeyi kendi ROS 2 çalışma alanınızda (workspace) çalıştırmak için aşağıdaki adımları izleyebilirsiniz:
+To run this project in your own ROS 2 workspace, follow the steps below:
 
 ```bash
-# Çalışma alanınızın src klasörüne gidin
+# Navigate to the src directory of your workspace
 cd ~/ros2_ws/src
 
-# Repoyu klonlayın
+# Clone the repository
 git clone [https://github.com/muhammet-alaybey-cilesiz/ros2-turtle-catch-them-all.git](https://github.com/muhammet-alaybey-cilesiz/ros2-turtle-catch-them-all.git)
 
-# Bağımlılıkları derleyin
+# Build the workspace
 cd ~/ros2_ws
 colcon build
 
-# Ortamı kaynaklandırın
+# Source the environment
 source install/setup.bash
+
+🚀 Usage
+
+To launch the entire system along with the simulation in one go, run the following command:
+
+ros2 launch robot_bringup turtle_catch_them_all_launch.xml
+

@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+import cmd
+
 import rclpy
 import math
 from rclpy.node import Node
@@ -119,9 +121,7 @@ class MainTurtleControllerNode(Node):
 
         cmd.angular.z = max(-self.max_angular, min(self.max_angular, self.k_angular * angle_error))
 
-        # Eğer yeterince hizalanmışsa ileri git
-        if abs(angle_error) < 0.2:
-            cmd.linear.x = max(0.0, min(self.max_linear, self.k_linear * distance))
+        cmd.linear.x = max(0.0, min(self.max_linear, self.k_linear * distance))
 
         # Eğer çok yaklaştıysa dur
         if distance < self.catch_threshold:

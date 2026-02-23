@@ -2,7 +2,7 @@
 
 This project is an autonomous "hunter-gatherer" turtle simulation developed using the ROS 2 framework. Running alongside the turtlesim node, the system detects randomly spawning targets (food turtles), calculates its trajectory using a proportional controller (P-Controller), and hunts the targets one by one.
 
-![Screencastfrom2026-02-2312-19-26-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/8121350c-de2a-40e6-bf55-98cbd00b6207)
+![Screencastfrom2026-02-2316-31-54-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/a7bd9645-c6f5-4f20-bce7-c7c27e8f99ae)
 
 ## ⚙️ System Architecture & Features
 

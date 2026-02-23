@@ -30,8 +30,6 @@ colcon build
 source install/setup.bash
 
 🚀 Usage
-
-To launch the entire system along with the simulation in one go, run the following command:
-
+#To launch the entire system along with the simulation in one go, run the following command:
 ros2 launch robot_bringup turtle_catch_them_all_launch.xml
 
